@@ -1,12 +1,22 @@
 
-import Form from './Form.jsx';
 import '../style/App.css'
+import {useState} from 'react';
+
+
+
+
+
 
 function App() {
+  const [count , setCount] = useState(0)
+
+  const AddCount = ()=>{
+    setCount (count + 1)
+  }
   return (
     <div className="App">
       <h1>start part 2</h1>
-      <Form/>
+      <button onClick={()=>AddCount()}>Count : {count}</button>
     </div>
   );
 }
