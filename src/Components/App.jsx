@@ -8,20 +8,18 @@ import {useState} from 'react';
 
 
 function App() {
-  const [count , setCount] = useState(0)
-
-const fiveIncrease = ()=>{
-  for(let i = 0 ; i<5 ; i++){
-    setCount((prevState)=> prevState + 1)
-  }
-}
+ const [person ,setPerson] = useState({name : '' ,age:''});
+//  console.log({...person, gender :'Male'});
   return (
     <div className="App">
-      <h1>start part 2</h1>
-      <button onClick={()=> setCount (count + 1)}>Increase</button>
-      <button onClick={fiveIncrease}>Increase 5 Number</button>
-      <h1>{count}</h1>
-      <button onClick={()=> setCount (count - 1)}>Decrease</button>
+      <h1>useState with object</h1>
+    <input onChange={(e) => setPerson({...person,name : e.target.value})} />
+      <h2>Name : {person.name}</h2>
+    <input onChange={(e) => setPerson({...person,age : e.target.value})} type="number" />
+
+      <h2>Age : {person.age}</h2>
+      <h2>{JSON.stringify(person)}</h2>
+
     </div>
   );
 }
