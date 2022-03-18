@@ -8,17 +8,25 @@ import {useState} from 'react';
 
 
 function App() {
- const [person ,setPerson] = useState({name : '' ,age:''});
-//  console.log({...person, gender :'Male'});
+ const [items , setItems] = useState(['hamid', 'navid' , 'behrang']);
+
+ const [name , setName]= useState('');
+
+const handleClick = () => {
+  setItems([...items, name])
+}
+
   return (
     <div className="App">
-      <h1>useState with object</h1>
-    <input onChange={(e) => setPerson({...person,name : e.target.value})} />
-      <h2>Name : {person.name}</h2>
-    <input onChange={(e) => setPerson({...person,age : e.target.value})} type="number" />
+      <h1>useState with Array</h1>
 
-      <h2>Age : {person.age}</h2>
-      <h2>{JSON.stringify(person)}</h2>
+<ul>
+<input type="text" onChange={(e)=>setName(e.target.value)} />
+<button onClick={handleClick}>Add Name</button>
+  {items.map(item => {
+    return <li>{item}</li>
+  } )}
+</ul>
 
     </div>
   );
