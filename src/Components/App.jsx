@@ -9,22 +9,28 @@ import {useState, useEffect} from 'react';
 
 function App() {
 
-const [count , setCount] = useState(0);
-const [name ,setName] =useState('default name ')
+const [size , setSize] = useState(window.innerWidth);
 
+const checkSize = ()=> {
+   setSize ((window.innerWidth));
+
+}
 
 useEffect(()=> {
-  console.log("trigger use effect");
-},[count])
-// we put a empty array as a argumet to useEffect in order to our state be render just for one time
-// if we put a item in array our useEffect be rerender for just that item
+   window.addEventListener('resize' , checkSize);
+
+   return ()=>{
+    window.removeEventListener('resize' , checkSize);
+    //after return we try cleanup useEffect in order to prevent rerender
+    // here we can use [] , in order to do that also
+  }
+})
+
   return (
     <div className="App">
-      <h1>useEfect in Rect</h1>
+      <h1>cleanUp in useEffect</h1>
 
-<button onClick={()=> setCount(count + 1)}>InCrease : {count}</button>
-<input type="text" onChange={(e)=> setName(e.target.value)} />
-<h3>{name}</h3>
+      <h3>window : {size} px </h3>
 
 
 
