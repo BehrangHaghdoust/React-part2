@@ -1,6 +1,6 @@
 
 import '../style/App.css'
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 
 
@@ -8,25 +8,25 @@ import {useState} from 'react';
 
 
 function App() {
- const [items , setItems] = useState(['hamid', 'navid' , 'behrang']);
 
- const [name , setName]= useState('');
+const [count , setCount] = useState(0);
+const [name ,setName] =useState('default name ')
 
-const handleClick = () => {
-  setItems([...items, name])
-}
 
+useEffect(()=> {
+  console.log("trigger use effect");
+},[count])
+// we put a empty array as a argumet to useEffect in order to our state be render just for one time
+// if we put a item in array our useEffect be rerender for just that item
   return (
     <div className="App">
-      <h1>useState with Array</h1>
+      <h1>useEfect in Rect</h1>
 
-<ul>
-<input type="text" onChange={(e)=>setName(e.target.value)} />
-<button onClick={handleClick}>Add Name</button>
-  {items.map(item => {
-    return <li>{item}</li>
-  } )}
-</ul>
+<button onClick={()=> setCount(count + 1)}>InCrease : {count}</button>
+<input type="text" onChange={(e)=> setName(e.target.value)} />
+<h3>{name}</h3>
+
+
 
     </div>
   );
