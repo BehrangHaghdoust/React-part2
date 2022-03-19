@@ -9,30 +9,28 @@ import {useState, useEffect} from 'react';
 
 function App() {
 
-const [size , setSize] = useState(window.innerWidth);
 
-const checkSize = ()=> {
-   setSize ((window.innerWidth));
+  const [posts , setPost] = useState(null);
 
-}
 
-useEffect(()=> {
-   window.addEventListener('resize' , checkSize);
-
-   return ()=>{
-    window.removeEventListener('resize' , checkSize);
-    //after return we try cleanup useEffect in order to prevent rerender
-    // here we can use [] , in order to do that also
-  }
+useEffect(()=>{
+ fetch('https://jsonplaceholder.typicode.com/posts')
+.then(res => {return res.json()})
+.then(data => setPost(data))
 })
 
   return (
     <div className="App">
-      <h1>cleanUp in useEffect</h1>
+      <h1>fetch by useEffect</h1>
 
-      <h3>window : {size} px </h3>
-
-
+// instade of "posts == null ? '' " we can use &&
+{posts == null ? '' : posts.map(post => (
+<div key={post.id}>
+  <h3>{post.title}</h3>
+  <h5>{post.body}</h5>
+  <hr/>
+</div>
+))}
 
     </div>
   );
