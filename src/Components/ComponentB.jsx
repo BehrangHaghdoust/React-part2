@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import {CountContext} from '../Components/App.jsx';
+import CountContext from '../Context/CountContext';
 
 const ComponentB =()=> {
    const countContext = useContext(CountContext)
