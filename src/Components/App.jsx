@@ -18,29 +18,35 @@
 
 import { useReducer } from 'react';
 
-const intialState = 0;
+const intialState = {
+  count: 0
+};
 const reducer = (state, action) => {
-  switch (action) {
+  switch (action.type) {
     case 'increment':
-      return state + 1
+      return {...state ,count : state.count + action.payload}
+      case 'incrementFive':
+        return {...state ,count : state.count + action.payload}
     case 'decrement':
-      return state - 1
+      return {...state , count : state.count - action.payload}
     case 'reset':
       return intialState
     default:
-      return state
+      return
   }
 }
 
 function App() {
-  const [count, dispatch] = useReducer(reducer, intialState);
+  const [state, dispatch] = useReducer(reducer, intialState);
   return (
     <div className="App">
-      <h1>useReducer</h1>
-      <h3>{count}</h3>
-      <button onClick={()=>dispatch('increment')}>Increment</button>
-      <button onClick={()=>dispatch('decrement')}>Decrement</button>
-      <button onClick={()=>dispatch('reset')}>Reset</button>
+      <h1>useReducer --part 2 using object</h1>
+      <h3>{state.count}</h3>
+      <button onClick={() => dispatch({type:'increment', payload:1})}>Increment</button>
+      {/* <button onClick={() => dispatch('incrementFive')}>Increment 5</button> */}
+      <button onClick={() => dispatch({type:'incrementFive', payload:5})}>Increment 5</button>
+      <button onClick={() => dispatch({type:'decrement',payload:1})}>Decrement</button>
+      <button onClick={() => dispatch({type:'reset'})}>Reset</button>
     </div>
   );
 }
