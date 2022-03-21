@@ -1,21 +1,24 @@
 
-import {useState} from 'react';
+import {useCallback,useState} from 'react';
 import Count from './Count'
 import Button from './Button'
 import Title from './Title'
 
-function App() {
 
+{/* we use useCallback in order to prevent rerender 2 buttens put in a stracture */}
+
+
+function App() {
   const [countOne, setCountOne] = useState(0);
   const [countTwo, setCountTwo] = useState(0);
 
-const incrementCountOne = () => {
+const incrementCountOne = useCallback(() => {
   setCountOne(countOne + 1)
-}
-const incrementCountTwo = () => {
+},[countOne])
+const incrementCountTwo =useCallback(() => {
   setCountTwo(countTwo + 1)
 
-}
+}, [countTwo])
 
   return (
     <>

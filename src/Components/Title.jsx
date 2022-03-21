@@ -5,7 +5,7 @@ const Title = () => {
 
 return (
     <>
-        <h1>React.memo Part</h1>
+        <h1>React.memo Part---- working with useCallback</h1>
     </>
 )
 }
